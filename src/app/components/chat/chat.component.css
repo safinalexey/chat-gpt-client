@@ -1,18 +1,61 @@
-.chat-container {
+.chat-page-container {
+  display: flex;
+  height: calc(100vh - 80px); /* Adjust based on your app's header/footer */
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  overflow: hidden; /* Ensures children conform to border-radius */
+}
+
+.chat-list-sidebar {
+  width: 280px; /* Adjust width as needed */
+  min-width: 200px;
+  border-right: 1px solid #e0e0e0;
+  background-color: #f9f9f9;
+  padding: 10px;
+  overflow-y: auto;
+}
+
+.chat-main-area {
+  flex-grow: 1;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  height: 100vh;
+  background-color: #ffffff;
+  padding: 15px;
+}
+
+.responses {
+  flex-grow: 1;
+  overflow-y: auto;
+  margin-bottom: 15px;
+  padding: 10px;
+  border: 1px solid #efefef;
+  border-radius: 4px;
+  background-color: #fdfdfd;
+}
+
+.responses markdown {
+  display: block;
+  margin-bottom: 10px;
 }
 
 .prompt-container {
-  form {
-    display: flex;
-    justify-content: space-between;
-
-    mat-form-field {
-      width: 80%;
-    }
-  }
-
+  padding-top: 10px;
+  border-top: 1px solid #e0e0e0;
 }
+
+.example-form {
+  display: flex;
+  align-items: center; /* Align textarea and button */
+}
+
+.example-full-width {
+  flex-grow: 1;
+  margin-right: 10px; /* Space between textarea and button */
+}
+
+/* Ensure textarea uses available height better if not using cdkTextareaAutosize */
+/*
+textarea[matInput] {
+  min-height: 60px;
+}
+*/

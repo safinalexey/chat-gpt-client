@@ -1,19 +1,35 @@
-<div class="chat-container">
-  <div class="responses">
-    <!--    <>-->
-<!--    @for (response of responses; track $index) {-->
-      <markdown *ngFor="let response of responses" [data]="response"></markdown>
-<!--    }-->
-    <!--    </>-->
-  </div>
-  <div class="prompt-container">
-    <form (ngSubmit)="onSubmit()" class="example-form">
-      <mat-form-field class="example-full-width" matfor>
-        <mat-label>Your request</mat-label>
-        <textarea [formControl]="message" matInput (keyup.enter)="onSubmit()"></textarea>
-      </mat-form-field>
-      <button mat-raised-button type="submit">Submit</button>
-    </form>
+<!-- The "i'm visible only for logged in" text will be rendered. You might want to remove or place it meaningfully. -->
+<div class="chat-page-container">
+  <div class="chat-list-sidebar">
+    <app-chat-list
+      [chats]="recentChats"
+      (chatSelected)="onChatSelected($event)">
+    </app-chat-list>
   </div>
 
+  <div class="chat-main-area">
+    <div class="responses">
+      <!-- Using trackByIndex for *ngFor for potential performance improvement -->
+      <markdown *ngFor="let response of responses; trackBy: trackByIndex" [data]="response"></markdown>
+    </div>
+    <div class="prompt-container">
+      <form (ngSubmit)="onSubmit()" class="example-form">
+        <mat-form-field class="example-full-width" appearance="outline"> <!-- Added appearance for modern look -->
+          <mat-label>Your request</mat-label>
+          <textarea
+            matInput
+            [formControl]="message"
+            (keydown.enter)="onTextareaEnter($event)"
+            cdkTextareaAutosize
+            cdkAutosizeMinRows="1"
+            cdkAutosizeMaxRows="5"
+            placeholder="Type your message... (Shift+Enter for new line)">
+          </textarea>
+        </mat-form-field>
+        <button mat-raised-button color="primary" type="submit" [disabled]="!message.value?.trim() || message.disabled">
+          Submit
+        </button>
+      </form>
+    </div>
+  </div>
 </div>
