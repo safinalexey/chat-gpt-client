@@ -1,0 +1,17 @@
+<div *ngIf="chats && chats.length > 0" class="chat-list-container">
+  <h4>Recent Chats</h4>
+  <ul class="chat-list">
+    <li *ngFor="let chat of displayChats" (click)="onChatClick(chat.id)" class="chat-item">
+      {{ chat.title || chat.preview || ('Chat ' + chat.id) }}
+    </li>
+  </ul>
+  <button *ngIf="!showAll && chats.length > displayLimit" (click)="toggleShowAll()" class="toggle-button">
+    Show {{ remainingChatsCount }} more
+  </button>
+  <button *ngIf="showAll && chats.length > displayLimit" (click)="toggleShowAll()" class="toggle-button">
+    Show Less
+  </button>
+</div>
+<div *ngIf="!chats || chats.length === 0" class="no-chats">
+  <p>No recent chats found.</p>
+</div>
